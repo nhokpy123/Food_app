@@ -10,12 +10,12 @@ dotenv.config();
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use('/', express.static(path.join(__dirname, 'admin')));
+
 
 // Import routes
 const productRoutes = require('./routes/productRoute');
 const userRoute = require('./routes/userRoute');
-
+app.use('/', express.static(path.join(__dirname, 'admin')));
 
 app.use('/api/products', productRoutes);
 app.use('/api/users', userRoute);
