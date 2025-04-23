@@ -1,81 +1,351 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel</title>
-    <link rel="stylesheet" href="/admin/css/styles.css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SB Admin 2 - Product Management</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
 </head>
-<body>
-    <div class="container">
-        <header>
-            <h1>Admin Panel</h1>
-        </header>
 
-        <main>
-            <div class="form-section">
-                <h2>Add New Product</h2>
-                <form id="addProductForm">
-                    <input type="text" id="productName" placeholder="Name" required>
-                    <input type="text" id="productDescription" placeholder="Description" required>
-                    <input type="number" id="productPrice" placeholder="Price" required>
-                    <input type="text" id="productImg" placeholder="Image URL" required>
-                    <input type="text" id="productLocation" placeholder="Location">
-                    <input type="number" id="productType" placeholder="Type ID" required>
-                    <input type="text" id="productCreatedAt" placeholder="Created">
-                    <input type="text" id="productUpdateAt" placeholder="Updated">
-                    <input type="number" id="productStars" placeholder="Stars" required>
-                    <button type="submit">Add Product</button>
-                </form>
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-hamburger"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">Fast Food Admin</div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item">
+                <a class="nav-link" href="index.html">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Management
             </div>
 
-            <div class="table-section">
-                <h2>Product List</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th>Price</th>
-                            <th>Stars</th>
-                            <th>Updated At</th>
-                            <th>Created At</th>
-                            <th>Image</th>
-                            <th>Location</th>
-                            <th>Type ID</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="productTableBody">
-                        <!-- Products will be dynamically added here -->
-                    </tbody>
-                </table>
+            <!-- Nav Item - Product Management -->
+            <li class="nav-item active">
+                <a class="nav-link" href="products.html">
+                    <i class="fas fa-fw fa-utensils"></i>
+                    <span>Product Management</span></a>
+            </li>
+
+            <!-- Nav Item - Tables -->
+            <li class="nav-item">
+                <a class="nav-link" href="tables.html">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Tables</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
-        </main>
+
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <!-- Topbar Search -->
+                    <form
+                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <div class="input-group">
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                                aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+
+                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                        <li class="nav-item dropdown no-arrow d-sm-none">
+                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-search fa-fw"></i>
+                            </a>
+                            <!-- Dropdown - Messages -->
+                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                                aria-labelledby="searchDropdown">
+                                <form class="form-inline mr-auto w-100 navbar-search">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control bg-light border-0 small"
+                                            placeholder="Search for..." aria-label="Search"
+                                            aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button">
+                                                <i class="fas fa-search fa-sm"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Admin User</span>
+                                <img class="img-profile rounded-circle"
+                                    src="img/undraw_profile.svg">
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Profile
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Settings
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
+                                </a>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Product Management</h1>
+                        <button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#addProductModal">
+                            <i class="fas fa-plus fa-sm text-white-50"></i> Add New Product
+                        </button>
+                    </div>
+
+                    <!-- Product List Card -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Product List</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Name</th>
+                                            <th>Description</th>
+                                            <th>Price</th>
+                                            <th>Stars</th>
+                                            <th>Created At</th>
+                                            <th>Updated At</th>
+                                            <th>Image</th>
+                                            <th>Location</th>
+                                            <th>Type ID</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="productTableBody">
+                                        <!-- Products will be dynamically added here -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Your Website 2025</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
     </div>
-    <script src="/admin/js/script.js"></script>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Product Modal -->
+    <div class="modal fade" id="addProductModal" tabindex="-1" role="dialog" aria-labelledby="addProductModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addProductModalLabel">Add New Product</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="addProductForm">
+                        <div class="form-group">
+                            <label for="productName">Product Name</label>
+                            <input type="text" class="form-control" id="productName" placeholder="Enter product name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="productDescription">Description</label>
+                            <textarea class="form-control" id="productDescription" rows="3" placeholder="Enter product description" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="productPrice">Price</label>
+                            <input type="number" class="form-control" id="productPrice" placeholder="Enter price" step="0.01" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="productImg">Image URL</label>
+                            <input type="text" class="form-control" id="productImg" placeholder="Enter image URL" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="productLocation">Location</label>
+                            <input type="text" class="form-control" id="productLocation" placeholder="Enter location (optional)" value="VN">
+                        </div>
+                        <div class="form-group">
+                            <label for="productType">Type ID</label>
+                            <input type="number" class="form-control" id="productType" placeholder="Enter type ID" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="productStars">Stars</label>
+                            <input type="number" class="form-control" id="productStars" placeholder="Enter stars rating" step="0.1" value="0" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="saveProductBtn">Save Product</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="js/script.js"></script>
     <script>
-        // Handle form submission to add a product
-        document.getElementById("addProductForm").addEventListener("submit", function (e) {
-            e.preventDefault();
-
-            const product = {
-                name: document.getElementById("productName").value,
-                description: document.getElementById("productDescription").value,
-                price: parseFloat(document.getElementById("productPrice").value),
-                img: document.getElementById("productImg").value,
-                location: document.getElementById("productLocation").value || null,
-                createdAt: document.getElementById("productCreatedAt").value || null,
-                updateAt: document.getElementById("productUpdateAt").value || null,
-                type_id: parseInt(document.getElementById("productType").value),
-                stars: parseFloat(document.getElementById("productStars").value),
-            };
-
-            addProduct(product);
-            e.target.reset();
+        // Additional JavaScript to integrate with the existing script.js file
+        document.addEventListener("DOMContentLoaded", function() {
+            // Fetch products when the page loads
+            fetchProducts();
+            
+            // Handle save product button click
+            document.getElementById("saveProductBtn").addEventListener("click", function() {
+                const product = {
+                    name: document.getElementById("productName").value,
+                    description: document.getElementById("productDescription").value,
+                    price: parseFloat(document.getElementById("productPrice").value),
+                    img: document.getElementById("productImg").value,
+                    location: document.getElementById("productLocation").value || "VN",
+                    type_id: parseInt(document.getElementById("productType").value),
+                    stars: parseFloat(document.getElementById("productStars").value) || 0
+                };
+                
+                addProduct(product);
+                $('#addProductModal').modal('hide');
+                document.getElementById("addProductForm").reset();
+            });
         });
     </script>
 </body>
-</html>
 
+</html>
