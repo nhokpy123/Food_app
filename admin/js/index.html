@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="/admin/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Admin Panel</h1>
+        </header>
+
+        <main>
+            <div class="form-section">
+                <h2>Add New Product</h2>
+                <form id="addProductForm">
+                    <input type="text" id="productName" placeholder="Name" required>
+                    <input type="text" id="productDescription" placeholder="Description" required>
+                    <input type="number" id="productPrice" placeholder="Price" required>
+                    <input type="text" id="productImg" placeholder="Image URL" required>
+                    <input type="text" id="productLocation" placeholder="Location">
+                    <input type="number" id="productType" placeholder="Type ID" required>
+                    <input type="text" id="productCreatedAt" placeholder="Created">
+                    <input type="text" id="productUpdateAt" placeholder="Updated">
+                    <input type="number" id="productStars" placeholder="Stars" required>
+                    <button type="submit">Add Product</button>
+                </form>
+            </div>
+
+            <div class="table-section">
+                <h2>Product List</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Price</th>
+                            <th>Stars</th>
+                            <th>Updated At</th>
+                            <th>Created At</th>
+                            <th>Image</th>
+                            <th>Location</th>
+                            <th>Type ID</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="productTableBody">
+                        <!-- Products will be dynamically added here -->
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+    <script src="/admin/js/script.js"></script>
+    <script>
+        // Handle form submission to add a product
+        document.getElementById("addProductForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const product = {
+                name: document.getElementById("productName").value,
+                description: document.getElementById("productDescription").value,
+                price: parseFloat(document.getElementById("productPrice").value),
+                img: document.getElementById("productImg").value,
+                location: document.getElementById("productLocation").value || null,
+                createdAt: document.getElementById("productCreatedAt").value || null,
+                updateAt: document.getElementById("productUpdateAt").value || null,
+                type_id: parseInt(document.getElementById("productType").value),
+                stars: parseFloat(document.getElementById("productStars").value),
+            };
+
+            addProduct(product);
+            e.target.reset();
+        });
+    </script>
+</body>
+</html>
+
