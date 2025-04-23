@@ -4,23 +4,31 @@ const jwt = require("jsonwebtoken");
 
 // Đăng ký người dùng
 exports.register = async (req, res) => {
-  console.log("BODY RECEIVED:", req.body);
+  const { email, password, name, address, phone, role } = req.body;
 
   try {
-    // Mã hóa mật khẩu trước khi lưu
-    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    const existingUser = await User.findOne({ email });
+    if (existingUser) return res.status(400).json({ message: 'Email already exists' });
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     const newUser = new User({
-      ...req.body,
+      email,
       password: hashedPassword,
+      name,
+      address,
+      phone,
+      role: role || 'user', // mặc định là user nếu không có
     });
 
     await newUser.save();
-    res.status(201).json({ message: "User registered successfully" });
-  } catch (error) {
-    console.error("Registration error:", error);
-    res.status(400).json({ error: error.message });
+
+    res.status(201).json({ message: 'User registered successfully' });
+  } catch (err) {
+    res.status(500).json({ message: 'Server error' });
   }
 };
+
 
 // Đăng nhập
 exports.login = async (req, res) => {
