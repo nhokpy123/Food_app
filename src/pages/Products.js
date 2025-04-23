@@ -10,7 +10,7 @@ export default function Products() {
 
   useEffect(() => {
     setLoading(true);
-    axios.get('http://localhost:3030/api/products/allpopular')
+    axios.get('https://api-fast-food.onrender.com/api/products/allpopular')
       .then(res => {
         setProducts(res.data);
         setLoading(false);

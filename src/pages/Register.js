@@ -25,7 +25,7 @@ export default function Register() {
     setError('');
     
     try {
-      const res = await axios.post('http://localhost:3030/user/register', form);
+      const res = await axios.post('https://api-fast-food.onrender.com/api/users/register', form);
       alert('Đăng ký thành công!');
       console.log(res.data);
       

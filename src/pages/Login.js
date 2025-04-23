@@ -19,7 +19,7 @@ export default function Login() {
     setError('');
     
     try {
-      const res = await axios.post('http://localhost:3030/user/login', form);
+      const res = await axios.post('https://api-fast-food.onrender.com/api/users/login', form);
       alert('Đăng nhập thành công!');
       console.log(res.data);
       // Lưu token vào localStorage nếu có: localStorage.setItem('token', res.data.token);
