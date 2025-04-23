@@ -1,5 +1,5 @@
 // admin.js
-const baseUrl = "http://localhost:3030/api/products"; // Replace with your API base URL
+const baseUrl = "https://api-fast-food.onrender.com/api/products"; // Replace with your API base URL
 
 // Fetch all products
 async function fetchProducts() {
