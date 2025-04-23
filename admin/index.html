@@ -289,8 +289,8 @@
                             <input type="text" class="form-control" id="productLocation" placeholder="Enter location (optional)" value="VN">
                         </div>
                         <div class="form-group">
-                            <label for="productType">Type ID</label>
-                            <input type="number" class="form-control" id="productType" placeholder="Enter type ID" required>
+                            <label for="productTypeId">Type ID</label>
+                            <input type="number" class="form-control" id="productTypeId" placeholder="Enter type ID" required>
                         </div>
                         <div class="form-group">
                             <label for="productStars">Stars</label>
@@ -330,17 +330,38 @@
             
             // Handle save product button click
             document.getElementById("saveProductBtn").addEventListener("click", function() {
+                // Get form values
+                const productName = document.getElementById("productName").value;
+                const productDescription = document.getElementById("productDescription").value;
+                const productPrice = parseFloat(document.getElementById("productPrice").value);
+                const productImg = document.getElementById("productImg").value;
+                const productLocation = document.getElementById("productLocation").value || "VN";
+                const productTypeId = parseInt(document.getElementById("productTypeId").value);
+                const productStars = parseFloat(document.getElementById("productStars").value) || 0;
+                
+                // Validate type_id is present and is a number
+                if (!productTypeId || isNaN(productTypeId)) {
+                    alert("Type ID is required and must be a number");
+                    return;
+                }
+                
+                // Create product object with the correct field name for type_id
                 const product = {
-                    name: document.getElementById("productName").value,
-                    description: document.getElementById("productDescription").value,
-                    price: parseFloat(document.getElementById("productPrice").value),
-                    img: document.getElementById("productImg").value,
-                    location: document.getElementById("productLocation").value || "VN",
-                    type_id: parseInt(document.getElementById("productType").value),
-                    stars: parseFloat(document.getElementById("productStars").value) || 0
+                    name: productName,
+                    description: productDescription,
+                    price: productPrice,
+                    img: productImg,
+                    location: productLocation,
+                    type_id: productTypeId, // Ensure this field name matches exactly what the API expects
+                    stars: productStars
                 };
                 
+                console.log("Sending product data:", product); // Debug log
+                
+                // Call the addProduct function from script.js
                 addProduct(product);
+                
+                // Close modal and reset form
                 $('#addProductModal').modal('hide');
                 document.getElementById("addProductForm").reset();
             });
